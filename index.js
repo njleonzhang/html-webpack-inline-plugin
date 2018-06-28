@@ -16,11 +16,9 @@ HtmlWebpackInlinePlugin.prototype.apply = function(compiler) {
         'HtmlWebpackInlinePlugin',
         (htmlPluginData, callback) => {
           var html = htmlPluginData.html
-          console.log(html)
           inline(html, this.options, function(err, html) {
             if (!err) {
               htmlPluginData.html = html
-              console.log(htmlPluginData.html)
             }
             callback(null, htmlPluginData)
           })
