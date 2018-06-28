@@ -6,6 +6,7 @@ function HtmlWebpackInlinePlugin(options) {
 }
 
 HtmlWebpackInlinePlugin.prototype.apply = function(compiler) {
+  let self = this
   if (compiler.hooks) {
     compiler.hooks.compilation.tap('HtmlWebpackInlinePlugin', compilation => {
       if (!compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing) {
@@ -16,7 +17,7 @@ HtmlWebpackInlinePlugin.prototype.apply = function(compiler) {
         'HtmlWebpackInlinePlugin',
         (htmlPluginData, callback) => {
           var html = htmlPluginData.html
-          inline(html, this.options, function(err, html) {
+          inline(html, self.options, function(err, html) {
             if (!err) {
               htmlPluginData.html = html
             }
@@ -26,7 +27,7 @@ HtmlWebpackInlinePlugin.prototype.apply = function(compiler) {
       )
     })
   } else {
-    compiler.plugin('compilation', function(compilation, options) {
+    compiler.plugin('compilation', (compilation, options) => {
       compilation.plugin('html-webpack-plugin-before-html-processing', (htmlPluginData, callback) => {
         var html = htmlPluginData.html
         inline(html, self.options, function(err, html) {
