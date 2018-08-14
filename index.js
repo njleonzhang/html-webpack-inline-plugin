@@ -18,9 +18,10 @@ HtmlWebpackInlinePlugin.prototype.apply = function(compiler) {
         (htmlPluginData, callback) => {
           var html = htmlPluginData.html
           inline(html, self.options, function(err, html) {
-            if (!err) {
-              htmlPluginData.html = html
+            if (err) {
+              return callback(err)
             }
+            htmlPluginData.html = html
             callback(null, htmlPluginData)
           })
         }
@@ -31,9 +32,10 @@ HtmlWebpackInlinePlugin.prototype.apply = function(compiler) {
       compilation.plugin('html-webpack-plugin-before-html-processing', (htmlPluginData, callback) => {
         var html = htmlPluginData.html
         inline(html, self.options, function(err, html) {
-          if (!err) {
-            htmlPluginData.html = html
+          if (err) {
+            return callback(err)
           }
+          htmlPluginData.html = html
           callback(null, htmlPluginData)
         })
       })
