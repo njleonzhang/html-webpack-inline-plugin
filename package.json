@@ -10,6 +10,9 @@
   "repository": "git://github.com/storkyeh/html-webpack-inline-plugin.git",
   "license": "MIT",
   "dependencies": {
-    "inline-source": "^5.2.4"
+    "inline-source": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=7.10.1"
   }
 }
